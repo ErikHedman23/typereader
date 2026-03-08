@@ -50,7 +50,7 @@ export default function BookUpload() {
                 <div>
                     <label
                         htmlFor="title"
-                        className="block text-sm font-medium text-gray-700"
+                        className="block text-sm font-medium text-gray-900"
                     >
                         Book Title (optional)
                     </label>
@@ -59,7 +59,7 @@ export default function BookUpload() {
                         name="title"
                         id="title"
                         placeholder="Leave empty to use filename"
-                        className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                        className="mt-1 block w-full rounded-md border text-gray-900 border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
                     />
                 </div>
 
@@ -76,13 +76,13 @@ export default function BookUpload() {
                         id="file"
                         accept=".txt"
                         required
-                        className="mt-1 block w-full text-sm text-gray-500
+                        className="mt-1 block w-full text-sm text-gray-900
                   file:mr-4 file:rounded-md file:border-0
                   file:bg-blue-50 file:px-4 file:py-2
                   file:text-sm file:font-semibold file:text-blue-700
                   hover:file:bg-blue-100"
                     />
-                    <p className="mt-1 text-xs text-gray-500">
+                    <p className="mt-1 text-xs text-gray-900">
                         Upload a .txt file containing the book you want to type
                         through
                     </p>
