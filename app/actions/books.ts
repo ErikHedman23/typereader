@@ -114,3 +114,74 @@ export async function deleteBook(bookId: string) {
   revalidatePath("/dashboard");
   return { success: true };
 }
+
+export async function getBookForReading(bookId: string) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    return {
+      error: "Not authenticated.",
+    };
+  }
+  const { data: book, error: bookError } = await supabase
+    .from("books")
+    .select(
+      `
+      *,
+      progress:reading_progress(*)
+    `,
+    )
+    .eq("id", bookId)
+    .eq("user_id", user.id)
+    .single();
+  if (bookError) {
+    return { error: "Book not found." };
+  }
+  const progress =
+    Array.isArray(book.progress) && book.progress.length > 0
+      ? book.progress[0]
+      : null;
+
+  return {
+    book: {
+      ...book,
+      progress,
+    },
+  };
+}
+
+export async function updateReadingProgress(
+  bookId: string,
+  data: {
+    current_word_index: number;
+    total_words_typed: number;
+    total_errors: number;
+    total_time_seconds: number;
+    last_session_wpm?: number;
+    last_session_accuracy?: number;
+  },
+) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    return { error: "Not authenticated." };
+  }
+  const { error } = await supabase
+    .from("reading_progress")
+    .update(data)
+    .eq("book_id", bookId)
+    .eq("user_id", user.id);
+
+  if (error) {
+    return { error: error.message };
+  }
+  return { success: true };
+}
