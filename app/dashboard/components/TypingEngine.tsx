@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useEffect, useRef } from "react";
 import {
     parseBookIntoWords,
@@ -64,7 +65,7 @@ export default function TypingEngine({
                         🎉 Book Complete!
                     </h2>
                     <p className="mt-2 text-gray-800">
-                        You have finished typing through this book
+                        You have finished typing through this book.
                     </p>
                 </div>
             </div>
@@ -83,7 +84,7 @@ export default function TypingEngine({
                                 key={word.index}
                                 className={`
                       ${isCurrent ? "bg-blue-200 font-semibold px-1 rounded" : ""}
-                      ${!isCurrent && word.index < currentWordIndex ? "text-gray-400" : "text-gray-900"}
+                      ${!isCurrent && word.index < currentWordIndex ? "text-gray-300" : "text-gray-900"}
                     `}
                             >
                                 {word.text}{" "}
@@ -106,7 +107,7 @@ export default function TypingEngine({
                         onChange={(e) => handleInputChange(e.target.value)}
                         onKeyDown={handleKeyDown}
                         className={`
-                  w-full text-2xl px-4 py-3 rounded-lg border-2 outline-none transition-colors
+                  w-full text-2xl px-4 py-3 rounded-lg border-2 outline-none transition-colors text-gray-900
                   ${isCorrect === null ? "border-gray-300" : ""}
                   ${isCorrect === true ? "border-green-500 bg-green-50" : ""}
                   ${isCorrect === false ? "border-red-500 bg-red-50" : ""}
@@ -119,7 +120,7 @@ export default function TypingEngine({
                     />
                 </div>
 
-                <div className="flex items-center justify-between text-sm text-gray-600">
+                <div className="flex items-center justify-between text-sm text-gray-900">
                     <div>
                         Target:{" "}
                         <span className="font-mono font-semibold">
