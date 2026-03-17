@@ -16,7 +16,7 @@ type FinalTypingStats = {
   resetStats: () => TypingStats;
 };
 
-export function useTypingStats(): FinalTypingStats {
+export function useTypingStats() {
   const [stats, setStats] = useState<TypingStats>({
     startTime: null,
     totalWordsTyped: 0,
